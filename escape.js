@@ -510,6 +510,8 @@ function drawBG(writeMessages){
 		
 		player.roomsVisited += 1;
 	
+		console.log("points")
+		checkPoints();
 	}
 	
 	var isChestObjEmpty = isEmpty(roomProperties.chest);
@@ -1099,7 +1101,18 @@ document.addEventListener('keydown', function(event) {
 	}
 
 });
+var cheevos;
 
+cheevos = [10, 100, 200, 500, 1000, 2000, 5000, 10000, 20000];
+
+function checkPoints (){
+  if (player.gold + player.roomsVisited >= cheevos[0]) {
+    writeMessage("Holy shit!!!!! You've earned an achievement!!!!!","messageGreen");
+    writeMessage("8============================@","messageGreen");
+    cheevos.shift();
+    return null;
+  }
+};
 function checkRoom () {
 
 	var roomProperties = rooms[currentRoomPos.x][currentRoomPos.y];
@@ -1160,7 +1173,7 @@ function checkRoom () {
 		player.keys += roomProperties.chest.keys;
 		player.gold += roomProperties.chest.gold;
 		player.food += roomProperties.chest.food;
-		
+
 		if(player.health + roomProperties.chest.health > player.maxHealth){
 		
 			player.health = player.maxHealth;
@@ -1269,6 +1282,6 @@ function checkRoom () {
 		emptyRoomList.push({x:currentRoomPos.x, y:currentRoomPos.x});
 	
 	}
-	
+
 
 }
